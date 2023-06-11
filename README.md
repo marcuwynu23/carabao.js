@@ -1,4 +1,12 @@
+<div align="center">
+
 # Carabao.js
+
+[![GitHub license](https://img.shields.io/github/license/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/issues)
+
+</div>
 
 Carabao.js is a lightweight and minimalist web library designed to simplify web development on top of the popular Express.js framework. Drawing inspiration from the philosophy of Ruby on Rails, Carabao.js aims to minimize configuration and provide developers with a seamless and intuitive development experience.
 
