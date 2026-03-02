@@ -1,59 +1,152 @@
-<div align="center">
-
-# Carabao.js
+# Carabao
 
 [![GitHub license](https://img.shields.io/github/license/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/issues)
 
-</div>
-
-Carabao.js is a lightweight and minimalist web library designed to simplify web development on top of the popular Express.js framework. Drawing inspiration from the philosophy of Ruby on Rails, Carabao.js aims to minimize configuration and provide developers with a seamless and intuitive development experience.
-
-With Carabao.js, you can leverage the power of Express.js while benefiting from additional abstractions and conventions that simplify common web development tasks. It offers a layer of abstraction over Express.js, reducing the need for extensive configuration and boilerplate code.
-
-## Key Features
-
-### Simplified Configuration
-
-Carabao.js reduces the complexity of setting up an Express.js application by providing sensible defaults and eliminating the need for excessive configuration. Developers can quickly get started with minimal setup and focus on building their application logic.
-
-### Convention over Configuration
-
-Following the principle of "convention over configuration," Carabao.js promotes a set of predefined conventions that simplify the development process. This approach reduces the decision-making burden on developers, as they can rely on the established conventions to guide their application's structure.
-
-### Intuitive Routing
-
-Carabao.js introduces a streamlined routing mechanism that allows developers to define routes using a concise syntax. It simplifies the process of handling HTTP requests and mapping them to the appropriate controller or action.
-
-### Model-View-Controller (MVC) Architecture
-
-Inspired by Ruby on Rails, Carabao.js encourages the adoption of the MVC architectural pattern. It provides a clear separation of concerns between models, views, and controllers, making code organization and maintenance more straightforward.
-
-### Integrated Templating
-
-Carabao.js offers built-in support for templating engines, allowing developers to seamlessly render dynamic views. By integrating popular templating engines such as EJS or Handlebars, it simplifies the process of generating HTML responses.
-
-### Middleware and Plugins
-
-Carabao.js seamlessly integrates with Express.js middleware and provides a plugin system for extending its functionality. Developers can leverage the rich ecosystem of Express.js middleware and add additional features as needed.
-
-## Getting Started
-
-To get started with Carabao.js, follow the installation instructions and explore the documentation at [link-to-docs](https://carabao-js-docs.com).
-
-## Examples
-
-Check out the examples directory for sample applications built with Carabao.js, showcasing its simplicity and power.
-
-## Contributing
-
-Contributions are welcome! Please read the [contribution guidelines](https://github.com/carabao-js/carabao/blob/main/CONTRIBUTING.md) for more information.
-
-## License
-
-Carabao.js is open-source software licensed under the [MIT License](https://github.com/carabao-js/carabao/blob/main/LICENSE).
+A **Laravel-like** Node.js web framework. TypeScript-first, built on Express. Convention over configuration—most wiring is hidden so you focus on routes and controllers.
 
 ---
 
-Carabao.js embraces simplicity and aims to minimize the learning curve, making it an ideal choice for developers who value a lightweight and opinionated approach to web development. Whether you're building a small web application or a larger-scale project, Carabao.js empowers you to focus on writing clean and maintainable code without being overwhelmed by unnecessary configuration.
+## Create a new project (CLI)
+
+```bash
+npx carabao create my-app
+cd my-app
+npm install
+npm run build
+npm start
+```
+
+This scaffolds:
+
+- `index.ts` – app entry (calls `createApp`, no manual wiring)
+- `app/` – config, routes, controllers, middlewares, constants, database, views
+- `esbuild.config.js` – build script (outputs to `dist/`)
+- `tsconfig.json`, `package.json`, `.env.example`
+
+---
+
+## Quick start (Laravel-style)
+
+After **create**, your `index.ts` is:
+
+```ts
+import "dotenv/config";
+import path from "path";
+import { createApp } from "carabao";
+
+const root = path.join(__dirname, "..");
+const app = createApp({ root });
+
+(async () => {
+  const { address, port } = await app.serve();
+  console.log(`Server at http://${address}:${port}`);
+})();
+```
+
+No need to require routes/controllers yourself—the framework loads them from `app/` (or `dist/app/` when built).
+
+---
+
+## Using as a library (CommonJS or ESM)
+
+**CommonJS**
+
+```js
+const { Application, createApp, env } = require("carabao");
+
+// Minimal
+const app = new Application({ init: { port: 9000 } });
+app.get("/", (req, res) => res.send("Hello"));
+app.serve();
+```
+
+**TypeScript / ESM**
+
+```ts
+import { Application, createApp, env } from "carabao";
+
+const app = new Application({ init: { port: 9000 } });
+app.get("/", (req, res) => res.send("Hello"));
+await app.serve();
+```
+
+- `main` → CommonJS build
+- `module` → ESM build
+- `types` → TypeScript declarations
+
+---
+
+## App structure (convention)
+
+```
+my-app/
+├── index.ts              # Entry – createApp({ root }).serve()
+├── esbuild.config.js     # Build → dist/
+├── tsconfig.json
+├── .env
+├── app/
+│   ├── config/
+│   │   ├── routes.ts     # { home: "/", about: "/about" }
+│   │   └── views.ts
+│   ├── controllers/
+│   │   └── controllers.ts
+│   ├── middlewares/
+│   │   └── middlewares.ts
+│   ├── constants/
+│   │   └── constants.ts
+│   ├── database/
+│   │   └── database.ts
+│   └── views/            # Nunjucks templates
+└── public/
+```
+
+`createApp({ root })` loads from `root/dist/app` (after build) or `root/app` (dev).
+
+---
+
+## Convention-based controllers
+
+In `app/config/routes.ts`: route name → path. In `app/controllers/controllers.ts`: same-name classes with methods:
+
+| Method   | HTTP   | Path           |
+|--------|--------|----------------|
+| `index`  | GET    | `/`            |
+| `show`   | GET    | `/show/:id`    |
+| `create` | GET    | `/create`      |
+| `store`  | POST   | `/store`       |
+| `edit`   | GET    | `/edit/:id`    |
+| `update` | GET    | `/update/:id`  |
+| `destroy`| GET    | `/destroy/:id` |
+
+---
+
+## Helpers
+
+- **`env(key, default?)`** – Laravel-style env helper (from `carabao`).
+
+---
+
+## Build & run (this repo)
+
+```bash
+npm install
+npm run build    # TypeScript → dist/cjs + dist/esm
+npm test         # Jest
+npm start        # Run app (uses app/ and dist/cjs)
+```
+
+---
+
+## Tests
+
+- **Application** – create app, default/custom init, get/post routes, route+controller wiring, serve/close
+- **bootstrap** – `env()` with value, default, empty
+- **createApp** – loads from `app/` when `dist/app` missing, responds on /
+- **CLI create** – creates project dir, app structure, package.json, rejects if dir exists
+
+---
+
+## License
+
+MIT © [Mark Wayne Menorca](https://github.com/marcuwynu23)
