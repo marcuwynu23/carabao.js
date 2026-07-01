@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const ROUTES_TS = `/** Route name -> path (Laravel-style). */
+const ROUTES_TS = `/** Route name -> path. */
 export default {
   home: "/",
   about: "/about",
@@ -109,10 +109,12 @@ const TSCONFIG_JSON = `{
 
 `;
 
-const PACKAGE_JSON = (name: string) => `{
+const PACKAGE_JSON = (name: string, pm: string) => {
+  const pmField = pm === "npm" ? "" : `\n  "packageManager": "${pm}@latest",`;
+  return `{
   "name": "${name}",
   "version": "1.0.0",
-  "private": true,
+  "private": true,${pmField}
   "type": "commonjs",
   "scripts": {
     "build": "node esbuild.config.js",
@@ -132,6 +134,7 @@ const PACKAGE_JSON = (name: string) => `{
   }
 }
 `;
+};
 
 const ENV_EXAMPLE = `NODE_ENV=development
 APP_NAME=My App
@@ -145,11 +148,18 @@ function writeFile(dir: string, file: string, content: string): void {
   fs.writeFileSync(full, content, "utf8");
 }
 
+const PM_CMD: Record<string, string> = {
+  npm: "npm",
+  pnpm: "pnpm",
+  yarn: "yarn",
+};
+
 /**
  * Scaffold a new Carabao project.
  * Creates app/, index.ts, esbuild.config.js, tsconfig, package.json, .env.example.
  */
-export function runCreate(projectName: string, targetDir: string): void {
+export function runCreate(projectName: string, targetDir: string, packageManager = "npm"): void {
+  const pm = PM_CMD[packageManager] ?? "npm";
   const root = path.resolve(targetDir, projectName);
   if (fs.existsSync(root)) {
     throw new Error(`Directory already exists: ${root}`);
@@ -175,5 +185,11 @@ export function runCreate(projectName: string, targetDir: string): void {
   }
 
   const pkgPath = path.join(root, "package.json");
-  fs.writeFileSync(pkgPath, PACKAGE_JSON(projectName), "utf8");
+  fs.writeFileSync(pkgPath, PACKAGE_JSON(projectName, pm), "utf8");
+
+  console.log(`Created project "${projectName}". Next steps:`);
+  console.log(`  cd ${projectName}`);
+  console.log(`  ${pm} install`);
+  console.log(`  ${pm} run build`);
+  console.log(`  ${pm} start`);
 }
