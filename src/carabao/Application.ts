@@ -1,19 +1,13 @@
 import express from "express";
-import nunjucks from "nunjucks";
 import path from "path";
 import type { RequestHandler } from "express";
 import type { CarabaoOptions, ServeResult, Controller } from "./types.js";
 
 type ControllerClass = new () => Controller;
 
-/**
- * Carabao Application – Laravel-like Express framework.
- * Technical details hidden; configure via env and app/ structure.
- */
 export class Application {
   public readonly app: express.Express;
   public readonly init: Required<CarabaoOptions["init"]> & {
-    viewDir: string;
     staticDir: string;
   };
   private _routeNames: string[] = [];
@@ -25,7 +19,6 @@ export class Application {
       database = {},
       controllers = {},
       routes = {},
-      views = {},
       middlewares = [],
       constants = {},
     } = options;
@@ -34,14 +27,12 @@ export class Application {
       name: init.name ?? "Carabao",
       address: init.address ?? "0.0.0.0",
       port: init.port != null ? Number(init.port) : 9000,
-      viewDir: init.viewDir ?? path.join(process.cwd(), "views"),
       staticDir: init.staticDir ?? path.join(process.cwd(), "public"),
     };
 
     (this as unknown as Record<string, unknown>).database = database;
     (this as unknown as Record<string, unknown>).controllers = controllers;
     (this as unknown as Record<string, unknown>).routes = routes;
-    (this as unknown as Record<string, unknown>).views = views;
     (this as unknown as Record<string, unknown>).constants = constants;
     (this as unknown as Record<string, unknown>).middlewares = Array.isArray(middlewares)
       ? middlewares
@@ -57,7 +48,6 @@ export class Application {
     this.routesSetup();
     this.controllersSetup();
     this.routeAndControllerSetup();
-    this.viewsSetup();
     this.databaseSetup();
   }
 
@@ -70,13 +60,6 @@ export class Application {
     } catch {
       // ignore missing static dir
     }
-
-    nunjucks.configure(this.init.viewDir, {
-      express: this.app,
-      autoescape: true,
-      noCache: process.env.NODE_ENV === "development",
-      watch: process.env.NODE_ENV === "development",
-    });
   }
 
   private databaseSetup(): void {}
@@ -128,8 +111,6 @@ export class Application {
       }
     }
   }
-
-  private viewsSetup(): void {}
 
   get(path: string, ...handlers: RequestHandler[]): this {
     this.app.get(path, ...handlers);
