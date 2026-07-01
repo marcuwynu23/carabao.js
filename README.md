@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  Convention-over-configuration Node.js web framework. TypeScript-first, built on Express.
+  MVC Node.js web framework. TypeScript-first, built on Express.
 </p>
 
 ## Getting Started
