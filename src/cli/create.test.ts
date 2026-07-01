@@ -48,6 +48,19 @@ describe("CLI create", () => {
     expect(pkg.scripts.start).toBe("node dist/index.js");
     expect(pkg.scripts.dev).toBe("tsx watch index.ts");
     expect(pkg.devDependencies.tsx).toBeDefined();
+    expect(pkg.packageManager).toBeUndefined();
+  });
+
+  it("adds packageManager field for pnpm", () => {
+    runCreate("my-app", tmpDir, "pnpm");
+    const pkg = JSON.parse(fs.readFileSync(path.join(tmpDir, "my-app", "package.json"), "utf8"));
+    expect(pkg.packageManager).toMatch(/^pnpm/);
+  });
+
+  it("adds packageManager field for yarn", () => {
+    runCreate("my-app", tmpDir, "yarn");
+    const pkg = JSON.parse(fs.readFileSync(path.join(tmpDir, "my-app", "package.json"), "utf8"));
+    expect(pkg.packageManager).toMatch(/^yarn/);
   });
 
   it("index.ts imports app modules directly", () => {
