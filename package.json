@@ -1,6 +1,6 @@
 {
   "name": "carabao",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "MVC Node.js/Express framework with TypeScript",
   "main": "dist/cjs/carabao/index.js",
   "module": "dist/esm/carabao/index.js",
