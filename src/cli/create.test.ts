@@ -37,7 +37,6 @@ describe("CLI create", () => {
     expect(fs.existsSync(path.join(root, "app", "middlewares", "middlewares.ts"))).toBe(true);
     expect(fs.existsSync(path.join(root, "app", "constants", "constants.ts"))).toBe(true);
     expect(fs.existsSync(path.join(root, "app", "database", "database.ts"))).toBe(true);
-    expect(fs.existsSync(path.join(root, "app", "config", "views.ts"))).toBe(true);
     expect(fs.existsSync(path.join(root, "public"))).toBe(true);
   });
 
@@ -51,10 +50,13 @@ describe("CLI create", () => {
     expect(pkg.devDependencies.tsx).toBeDefined();
   });
 
-  it("index.ts uses correct root detection", () => {
+  it("index.ts imports app modules directly", () => {
     runCreate("my-app", tmpDir);
     const content = fs.readFileSync(path.join(tmpDir, "my-app", "index.ts"), "utf8");
-    expect(content).toContain("path.basename(__dirname) === \"dist\" ? path.resolve(__dirname, \"..\") : __dirname");
+    expect(content).toContain('import routes from "./app/config/routes"');
+    expect(content).toContain('import controllers from "./app/controllers/controllers"');
+    expect(content).toContain('import middlewares from "./app/middlewares/middlewares"');
+    expect(content).toContain("createApp({ root, routes, controllers, middlewares, constants, database })");
   });
 
   it("routes.ts exports route map", () => {
@@ -75,7 +77,7 @@ describe("CLI create", () => {
     expect(content).toContain("export default { welcome, home, about }");
   });
 
-  it("esbuild.config.js uses single entry point", () => {
+  it("esbuild.config.js bundles single entry", () => {
     runCreate("my-app", tmpDir);
     const content = fs.readFileSync(path.join(tmpDir, "my-app", "esbuild.config.js"), "utf8");
     expect(content).toContain("entryPoints: [\"index.ts\"]");
