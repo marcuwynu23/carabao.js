@@ -38,16 +38,49 @@ describe("CLI create", () => {
     expect(fs.existsSync(path.join(root, "app", "constants", "constants.ts"))).toBe(true);
     expect(fs.existsSync(path.join(root, "app", "database", "database.ts"))).toBe(true);
     expect(fs.existsSync(path.join(root, "app", "config", "views.ts"))).toBe(true);
-    expect(fs.existsSync(path.join(root, "app", "views", "welcome.html"))).toBe(true);
     expect(fs.existsSync(path.join(root, "public"))).toBe(true);
   });
 
-  it("package.json has project name", () => {
+  it("package.json has correct scripts and dependencies", () => {
     runCreate("hello-world", tmpDir);
     const pkg = JSON.parse(fs.readFileSync(path.join(tmpDir, "hello-world", "package.json"), "utf8"));
     expect(pkg.name).toBe("hello-world");
-    expect(pkg.scripts.build).toBeDefined();
-    expect(pkg.scripts.start).toBeDefined();
+    expect(pkg.scripts.build).toBe("node esbuild.config.js");
+    expect(pkg.scripts.start).toBe("node dist/index.js");
+    expect(pkg.scripts.dev).toBe("tsx watch index.ts");
+    expect(pkg.devDependencies.tsx).toBeDefined();
+  });
+
+  it("index.ts uses correct root detection", () => {
+    runCreate("my-app", tmpDir);
+    const content = fs.readFileSync(path.join(tmpDir, "my-app", "index.ts"), "utf8");
+    expect(content).toContain("path.basename(__dirname) === \"dist\" ? path.resolve(__dirname, \"..\") : __dirname");
+  });
+
+  it("routes.ts exports route map", () => {
+    runCreate("my-app", tmpDir);
+    const content = fs.readFileSync(path.join(tmpDir, "my-app", "app", "config", "routes.ts"), "utf8");
+    expect(content).toContain("home: \"/\"");
+    expect(content).toContain("about: \"/about\"");
+    expect(content).toContain("welcome: \"/welcome\"");
+  });
+
+  it("controllers.ts exports controller classes", () => {
+    runCreate("my-app", tmpDir);
+    const content = fs.readFileSync(path.join(tmpDir, "my-app", "app", "controllers", "controllers.ts"), "utf8");
+    expect(content).toContain("export class welcome");
+    expect(content).toContain("export class home");
+    expect(content).toContain("export class about");
+    expect(content).toContain("res.json");
+    expect(content).toContain("export default { welcome, home, about }");
+  });
+
+  it("esbuild.config.js uses single entry point", () => {
+    runCreate("my-app", tmpDir);
+    const content = fs.readFileSync(path.join(tmpDir, "my-app", "esbuild.config.js"), "utf8");
+    expect(content).toContain("entryPoints: [\"index.ts\"]");
+    expect(content).toContain("bundle: true");
+    expect(content).toContain("outfile: \"dist/index.js\"");
   });
 
   it("throws if directory exists", () => {
