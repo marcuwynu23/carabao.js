@@ -50,16 +50,17 @@ const DATABASE_TS = `/** Database config. */
 export default {};
 `;
 
-const VIEWS_TS = `/** View config (globals, filters). */
-export default {};
-`;
-
 const INDEX_TS = `import "dotenv/config";
 import path from "path";
 import { createApp } from "carabao";
+import routes from "./app/config/routes";
+import controllers from "./app/controllers/controllers";
+import middlewares from "./app/middlewares/middlewares";
+import constants from "./app/constants/constants";
+import database from "./app/database/database";
 
 const root = path.basename(__dirname) === "dist" ? path.resolve(__dirname, "..") : __dirname;
-const app = createApp({ root });
+const app = createApp({ root, routes, controllers, middlewares, constants, database });
 
 (async () => {
   try {
@@ -164,7 +165,6 @@ export function runCreate(projectName: string, targetDir: string): void {
     ["app/middlewares/middlewares.ts", MIDDLEWARES_TS],
     ["app/constants/constants.ts", CONSTANTS_TS],
     ["app/database/database.ts", DATABASE_TS],
-    ["app/config/views.ts", VIEWS_TS],
   ];
 
   fs.mkdirSync(root, { recursive: true });
