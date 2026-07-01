@@ -12,70 +12,62 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [18.x]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node-version: [ 18.x ]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install dependencies
+      run: npm ci
 
-      - name: Run ESM tests
-
-        run: npm run test:esm
-
-      - name: Run CommonJS tests
-        run: npm run test:common
-
-      - name: Run all tests
-        run: npm test
+    - name: Run all tests
+      run: npm test
 
   lint:
     name: Code Quality
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-          cache: 'npm'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install dependencies
+      run: npm ci
 
   build:
     name: Build Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-          cache: 'npm'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+    - name: Install dependencies
+      run: npm ci
 
-      - name: Verify package structure
-        run: |
-          echo "Testing ESM import..."
-          node --input-type=module -e "import('./src/index.js').then((mod) => { console.log('✅ ESM import successful'); console.log('Exports:', Object.keys(mod).join(', ')); })"
-          echo "Testing file existence..."
-          test -f src/index.js && echo "✅ src/index.js exists"
-          test -f src/index.cjs && echo "✅ src/index.cjs exists"
-          echo "✅ Package structure verified"
-
+    - name: Verify package structure
+      run: |
+        echo "Testing ESM import..."
+        node --input-type=module -e "import('./src/index.js').then((mod) => { console.log('✅ ESM import successful'); console.log('Exports:', Object.keys(mod).join(', ')); })"
+        echo "Testing file existence..."
+        test -f src/index.js && echo "✅ src/index.js exists"
+        test -f src/index.cjs && echo "✅ src/index.cjs exists"
+        echo "✅ Package structure verified"
