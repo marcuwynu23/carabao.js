@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 import { Application } from "./Application.js";
 import type { CarabaoOptions, RequestHandler } from "./types.js";
@@ -9,16 +10,30 @@ export function env(key: string, defaultValue?: string): string {
   return defaultValue ?? "";
 }
 
+const EXTENSIONS = [".js", ".ts", ".mjs", ".cjs", ".mts", ".cts"];
+
+export function resolveFile(basePath: string): string | undefined {
+  if (fs.existsSync(basePath)) return basePath;
+  const parsed = path.parse(basePath);
+  for (const ext of EXTENSIONS) {
+    const candidate = path.join(parsed.dir, parsed.name + ext);
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return undefined;
+}
+
 function loadModule<T>(...paths: string[]): T | undefined {
   for (const p of paths) {
+    const resolved = resolveFile(p);
+    if (!resolved) continue;
     try {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const loaded = require(p) as T | { default?: T };
-      return (loaded && (loaded as { default?: T }).default !== undefined)
+      const loaded = require(resolved) as T | { default?: T };
+      return loaded && (loaded as { default?: T }).default !== undefined
         ? (loaded as { default: T }).default
         : (loaded as T);
     } catch {
-      // try next path
+      // file found but failed to load
     }
   }
   return undefined;
