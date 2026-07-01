@@ -72,7 +72,6 @@ describe("createApp", () => {
     fs.writeFileSync(path.join(appDir, "middlewares", "middlewares.js"), "module.exports = [];", "utf8");
     fs.writeFileSync(path.join(appDir, "constants", "constants.js"), "module.exports = {};", "utf8");
     fs.writeFileSync(path.join(appDir, "database", "database.js"), "module.exports = {};", "utf8");
-    fs.writeFileSync(path.join(configDir, "views.js"), "module.exports = {};", "utf8");
 
     const app = createApp({ root: tmpDir, init: { port: 0 } });
     const { port } = await app.serve();
@@ -115,7 +114,6 @@ describe("createApp", () => {
     fs.writeFileSync(path.join(appDir, "middlewares", "middlewares.ts"), "export default [];", "utf8");
     fs.writeFileSync(path.join(appDir, "constants", "constants.ts"), "export default {};", "utf8");
     fs.writeFileSync(path.join(appDir, "database", "database.ts"), "export default {};", "utf8");
-    fs.writeFileSync(path.join(configDir, "views.ts"), "export default {};", "utf8");
 
     const app = createApp({ root: tmpDir, init: { port: 0 } });
     const { port } = await app.serve();
@@ -150,7 +148,6 @@ describe("createApp", () => {
     fs.writeFileSync(path.join(appDir, "middlewares", "middlewares.js"), "module.exports = [];", "utf8");
     fs.writeFileSync(path.join(appDir, "constants", "constants.js"), "module.exports = {};", "utf8");
     fs.writeFileSync(path.join(appDir, "database", "database.js"), "module.exports = {};", "utf8");
-    fs.writeFileSync(path.join(configDir, "views.js"), "module.exports = {};", "utf8");
 
     const app = createApp({ root: tmpDir, init: { port: 0 } });
     const { port } = await app.serve();
@@ -191,7 +188,6 @@ describe("createApp", () => {
     fs.writeFileSync(path.join(appDir, "middlewares", "middlewares.js"), "module.exports = [];", "utf8");
     fs.writeFileSync(path.join(appDir, "constants", "constants.js"), "module.exports = {};", "utf8");
     fs.writeFileSync(path.join(appDir, "database", "database.js"), "module.exports = {};", "utf8");
-    fs.writeFileSync(path.join(configDir, "views.js"), "module.exports = {};", "utf8");
 
     const app = createApp({ root: tmpDir, init: { port: 0 } });
     const { port } = await app.serve();
