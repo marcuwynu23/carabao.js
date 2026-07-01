@@ -15,19 +15,19 @@ const ctx = { APP_NAME: process.env.APP_NAME ?? "App" };
 
 export class welcome {
   index(_req: Request, res: Response) {
-    return res.render("welcome.html", { ctx });
+    return res.json({ message: \`Welcome to \${ctx.APP_NAME}\` });
   }
 }
 
 export class home {
   index(_req: Request, res: Response) {
-    return res.render("home.html", { ctx });
+    return res.json({ message: "Home" });
   }
 }
 
 export class about {
   index(_req: Request, res: Response) {
-    return res.render("about.html", { ctx });
+    return res.json({ message: "About" });
   }
 }
 
@@ -58,7 +58,7 @@ const INDEX_TS = `import "dotenv/config";
 import path from "path";
 import { createApp } from "carabao";
 
-const root = path.join(__dirname, "..");
+const root = path.basename(__dirname) === "dist" ? path.resolve(__dirname, "..") : __dirname;
 const app = createApp({ root });
 
 (async () => {
@@ -114,7 +114,7 @@ const PACKAGE_JSON = (name: string) => `{
   "scripts": {
     "build": "node esbuild.config.js",
     "start": "node dist/index.js",
-    "dev": "node --watch dist/index.js"
+    "dev": "tsx watch index.ts"
   },
   "dependencies": {
     "carabao": "latest",
@@ -123,6 +123,7 @@ const PACKAGE_JSON = (name: string) => `{
   },
   "devDependencies": {
     "esbuild": "^0.19.0",
+    "tsx": "^4.0.0",
     "typescript": "^5.0.0"
   }
 }
@@ -165,7 +166,6 @@ export function runCreate(projectName: string, targetDir: string): void {
 
   fs.mkdirSync(root, { recursive: true });
   fs.mkdirSync(path.join(root, "public"), { recursive: true });
-  fs.mkdirSync(path.join(root, "app", "views"), { recursive: true });
 
   for (const [file, content] of files) {
     writeFile(root, file, content);
@@ -173,14 +173,4 @@ export function runCreate(projectName: string, targetDir: string): void {
 
   const pkgPath = path.join(root, "package.json");
   fs.writeFileSync(pkgPath, PACKAGE_JSON(projectName), "utf8");
-
-  // Default view
-  const viewsDir = path.join(root, "app", "views");
-  fs.writeFileSync(
-    path.join(viewsDir, "welcome.html"),
-    "<!DOCTYPE html><html><head><title>{{ ctx.APP_NAME }}</title></head><body><h1>Welcome</h1></body></html>",
-    "utf8",
-  );
-  fs.writeFileSync(path.join(viewsDir, "home.html"), "<!DOCTYPE html><html><body><h1>Home</h1></body></html>", "utf8");
-  fs.writeFileSync(path.join(viewsDir, "about.html"), "<!DOCTYPE html><html><body><h1>About</h1></body></html>", "utf8");
 }
