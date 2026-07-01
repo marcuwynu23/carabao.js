@@ -4,7 +4,6 @@ export interface CarabaoInit {
   name?: string;
   address?: string;
   port?: number;
-  viewDir?: string;
   staticDir?: string;
 }
 
@@ -15,7 +14,6 @@ export interface CarabaoOptions {
   middlewares?: RequestHandler[];
   constants?: Record<string, unknown>;
   database?: Record<string, unknown>;
-  views?: Record<string, unknown>;
 }
 
 export interface Controller {
