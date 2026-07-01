@@ -1,7 +1,7 @@
 {
   "name": "carabao",
   "version": "1.1.2",
-  "description": "Laravel-like Node.js/Express framework with TypeScript",
+  "description": "Convention-over-configuration Node.js/Express framework with TypeScript",
   "main": "dist/cjs/carabao/index.js",
   "module": "dist/esm/carabao/index.js",
   "types": "dist/cjs/carabao/index.d.ts",
@@ -20,7 +20,6 @@
     "web",
     "framework",
     "express",
-    "laravel",
     "typescript"
   ],
   "author": "Mark Wayne Menorca",
