@@ -3,7 +3,7 @@ import path from "path";
 import { Application } from "./Application.js";
 import type { CarabaoOptions, RequestHandler } from "./types.js";
 
-/** Get env var (Laravel-style helper). */
+/** Get env var helper. */
 export function env(key: string, defaultValue?: string): string {
   const v = process.env[key];
   if (v !== undefined && v !== "") return v;
@@ -40,7 +40,7 @@ function loadModule<T>(...paths: string[]): T | undefined {
 }
 
 /**
- * Create app from conventional app/ layout (Laravel-like).
+ * Create app from conventional app/ layout.
  * Loads routes, controllers, middlewares from root/dist/app or root/app.
  */
 export function createApp(options: { root: string } & Partial<CarabaoOptions>): Application {
