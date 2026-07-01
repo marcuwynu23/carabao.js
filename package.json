@@ -12,7 +12,6 @@
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.json",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "start": "node index.js",
     "test": "jest",
     "prepublishOnly": "npm run build"
   },
