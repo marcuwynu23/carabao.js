@@ -1,7 +1,9 @@
-# Carabao
+<h1 align="center">Carabao.js</h1>
 
-[![GitHub license](https://img.shields.io/github/license/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/marcuwynu23/carabao.js)](https://github.com/marcuwynu23/carabao.js/stargazers)
+<p align="center">
+  <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE"><img src="https://img.shields.io/github/license/marcuwynu23/carabao.js" alt="GitHub license"></a>
+  <a href="https://github.com/marcuwynu23/carabao.js/stargazers"><img src="https://img.shields.io/github/stars/marcuwynu23/carabao.js" alt="GitHub stars"></a>
+</p>
 
 A **Laravel-like** Node.js web framework. TypeScript-first, built on Express. Convention over configuration—most wiring is hidden so you focus on routes and controllers.
 
@@ -124,6 +126,42 @@ In `app/config/routes.ts`: route name → path. In `app/controllers/controllers.
 ## Helpers
 
 - **`env(key, default?)`** – Laravel-style env helper (from `carabao`).
+
+---
+
+## Development / Local usage (without publishing)
+
+Test the framework locally before publishing to npm:
+
+### 1. Link globally (npm link)
+
+```bash
+# In carabao.js repo root
+npm link
+
+# Then in your project directory
+npm link carabao
+npx carabao create my-app
+```
+
+### 2. Install from local path
+
+```bash
+# In your project directory (adjust path to carabao.js repo)
+npm install /path/to/carabao.js
+npx carabao create my-app
+```
+
+### 3. Pack as tarball
+
+```bash
+# In carabao.js repo root
+npm pack          # creates carabao-1.0.0.tgz
+
+# Then in your project directory
+npm install /path/to/carabao-1.0.0.tgz
+npx carabao create my-app
+```
 
 ---
 
