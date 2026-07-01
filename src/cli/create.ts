@@ -73,16 +73,14 @@ const app = createApp({ root });
 `;
 
 const ESBUILD_CONFIG_JS = `const esbuild = require("esbuild");
-const path = require("path");
 
 const isProd = process.env.NODE_ENV === "production";
 
 esbuild
   .build({
-    entryPoints: ["index.ts", "app/config/routes.ts", "app/controllers/controllers.ts", "app/middlewares/middlewares.ts", "app/constants/constants.ts", "app/database/database.ts", "app/config/views.ts"],
-    bundle: false,
-    outdir: "dist",
-    outbase: ".",
+    entryPoints: ["index.ts"],
+    bundle: true,
+    outfile: "dist/index.js",
     platform: "node",
     format: "cjs",
     target: "node18",
@@ -181,7 +179,7 @@ export function runCreate(projectName: string, targetDir: string): void {
   fs.writeFileSync(
     path.join(viewsDir, "welcome.html"),
     "<!DOCTYPE html><html><head><title>{{ ctx.APP_NAME }}</title></head><body><h1>Welcome</h1></body></html>",
-    "utf8"
+    "utf8",
   );
   fs.writeFileSync(path.join(viewsDir, "home.html"), "<!DOCTYPE html><html><body><h1>Home</h1></body></html>", "utf8");
   fs.writeFileSync(path.join(viewsDir, "about.html"), "<!DOCTYPE html><html><body><h1>About</h1></body></html>", "utf8");
