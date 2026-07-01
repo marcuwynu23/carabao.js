@@ -1,6 +1,6 @@
 {
   "name": "carabao",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Laravel-like Node.js/Express framework with TypeScript",
   "main": "dist/cjs/carabao/index.js",
   "module": "dist/esm/carabao/index.js",
