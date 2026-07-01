@@ -93,17 +93,19 @@ esbuild
 const TSCONFIG_JSON = `{
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "types": ["node", "carabao"]
   },
   "include": ["index.ts", "app/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
+
 `;
 
 const PACKAGE_JSON = (name: string) => `{
@@ -122,6 +124,7 @@ const PACKAGE_JSON = (name: string) => `{
     "express": "^4.18.0"
   },
   "devDependencies": {
+    "@types/node": "^26.1.0",
     "esbuild": "^0.19.0",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0"
