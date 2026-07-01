@@ -47,53 +47,38 @@ export function createApp(options: { root: string } & Partial<CarabaoOptions>): 
   const root = path.resolve(options.root);
   const distApp = path.join(root, "dist", "app");
   const appDir = path.join(root, "app");
-
-  const routes =
-    loadModule<CarabaoOptions["routes"]>(
-      path.join(distApp, "config", "routes.js"),
-      path.join(appDir, "config", "routes.js")
-    ) ?? {};
-
-  const controllers =
-    loadModule<CarabaoOptions["controllers"]>(
-      path.join(distApp, "controllers", "controllers.js"),
-      path.join(appDir, "controllers", "controllers.js")
-    ) ?? {};
-
-  const middlewares =
-    loadModule<RequestHandler[]>(
-      path.join(distApp, "middlewares", "middlewares.js"),
-      path.join(appDir, "middlewares", "middlewares.js")
-    ) ?? [];
-
-  const constants =
-    loadModule<CarabaoOptions["constants"]>(
-      path.join(distApp, "constants", "constants.js"),
-      path.join(appDir, "constants", "constants.js")
-    ) ?? {};
-
-  const database =
-    loadModule<CarabaoOptions["database"]>(
-      path.join(distApp, "database", "database.js"),
-      path.join(appDir, "database", "database.js")
-    ) ?? {};
-
-  const views =
-    loadModule<CarabaoOptions["views"]>(
-      path.join(distApp, "config", "views.js"),
-      path.join(appDir, "config", "views.js")
-    ) ?? {};
-
-  const viewDir = path.join(root, "app", "views");
   const staticDir = path.join(root, "public");
 
+  const routes = options.routes ?? loadModule<CarabaoOptions["routes"]>(
+    path.join(distApp, "config", "routes.js"),
+    path.join(appDir, "config", "routes.js")
+  ) ?? {};
+
+  const controllers = options.controllers ?? loadModule<CarabaoOptions["controllers"]>(
+    path.join(distApp, "controllers", "controllers.js"),
+    path.join(appDir, "controllers", "controllers.js")
+  ) ?? {};
+
+  const middlewares = options.middlewares ?? loadModule<RequestHandler[]>(
+    path.join(distApp, "middlewares", "middlewares.js"),
+    path.join(appDir, "middlewares", "middlewares.js")
+  ) ?? [];
+
+  const constants = options.constants ?? loadModule<CarabaoOptions["constants"]>(
+    path.join(distApp, "constants", "constants.js"),
+    path.join(appDir, "constants", "constants.js")
+  ) ?? {};
+
+  const database = options.database ?? loadModule<CarabaoOptions["database"]>(
+    path.join(distApp, "database", "database.js"),
+    path.join(appDir, "database", "database.js")
+  ) ?? {};
+
   return new Application({
-    ...options,
     init: {
       name: process.env.APP_NAME ?? "Carabao",
       address: process.env.ADDR ?? "0.0.0.0",
       port: process.env.PORT != null ? Number(process.env.PORT) : 9000,
-      viewDir,
       staticDir,
       ...options.init,
     },
@@ -102,6 +87,5 @@ export function createApp(options: { root: string } & Partial<CarabaoOptions>): 
     middlewares: Array.isArray(middlewares) ? middlewares : [],
     constants,
     database,
-    views,
   });
 }
