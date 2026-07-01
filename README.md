@@ -137,11 +137,12 @@ Test the framework locally before publishing to npm:
 
 ```bash
 # In carabao.js repo root
+npm run build
 npm link
 
 # Then in your project directory
 npm link carabao
-npx carabao create my-app
+carabao create my-app
 ```
 
 ### 2. Install from local path
