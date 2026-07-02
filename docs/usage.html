@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Carabao.js usage guide — CLI flags, API reference, examples, and project structure.">
+  <title>Usage — Carabao.js</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="assets/logo.svg" alt="Carabao.js">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="features.html">Features</a>
+      <a href="installation.html">Install</a>
+      <a href="usage.html" class="active">Usage</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="installation.html">Install</a>
+    <a href="usage.html" class="active">Usage</a>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="page-header">
+        <h1><span>Usage</span></h1>
+        <p>CLI commands, API reference, and examples to get the most out of Carabao.js.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>CLI Commands</h2>
+
+        <h3><code>carabao create &lt;name&gt;</code></h3>
+        <p>Scaffold a new MVC project. Generates the full directory structure, configuration files, and example code.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--pm</code></td>
+              <td><code>string</code></td>
+              <td><code>npm</code></td>
+              <td>Package manager to use (<code>npm</code>, <code>yarn</code>, <code>pnpm</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Examples:</p>
+        <div class="code-block">
+          <span class="comment"># Default (npm)</span><br>
+          <span class="cmd">npx carabao create my-app</span><br><br>
+          <span class="comment"># With yarn</span><br>
+          <span class="cmd">npx carabao create my-app --pm yarn</span><br><br>
+          <span class="comment"># With pnpm</span><br>
+          <span class="cmd">npx carabao create my-app --pm pnpm</span>
+        </div>
+
+        <h2>Project Structure</h2>
+        <p>The scaffolded project follows a clean MVC layout:</p>
+        <div class="code-block">
+          my-app/<br>
+          ├── index.ts              <span class="comment"># Entry point</span><br>
+          ├── esbuild.config.js     <span class="comment"># Build configuration</span><br>
+          ├── tsconfig.json         <span class="comment"># TypeScript config</span><br>
+          ├── .env                  <span class="comment"># Environment variables</span><br>
+          ├── app/<br>
+          │   ├── config/<br>
+          │   │   └── routes.ts     <span class="comment"># Route definitions</span><br>
+          │   ├── controllers/      <span class="comment"># Request handlers</span><br>
+          │   ├── middlewares/      <span class="comment"># Express middlewares</span><br>
+          │   ├── constants/        <span class="comment"># App constants</span><br>
+          │   └── database/         <span class="comment"># Database setup / models</span><br>
+          └── public/               <span class="comment"># Static assets</span>
+        </div>
+
+        <h2>API Reference</h2>
+
+        <h3><code>createApp(options)</code></h3>
+        <p>Creates and configures an Express application instance.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>root</code></td>
+              <td><code>string</code></td>
+              <td><code>__dirname</code></td>
+              <td>Project root directory</td>
+            </tr>
+            <tr>
+              <td><code>routes</code></td>
+              <td><code>Route[]</code></td>
+              <td><code>[]</code></td>
+              <td>Array of route definitions</td>
+            </tr>
+            <tr>
+              <td><code>controllers</code></td>
+              <td><code>object</code></td>
+              <td><code>{}</code></td>
+              <td>Controller map for auto-wiring</td>
+            </tr>
+            <tr>
+              <td><code>init</code></td>
+              <td><code>object</code></td>
+              <td><code>{ port: 9000 }</code></td>
+              <td>Server configuration</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3><code>Application</code></h3>
+        <p>The core application class with a familiar Express-like API.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>get()</code></td><td>Register a GET route</td></tr>
+            <tr><td><code>post()</code></td><td>Register a POST route</td></tr>
+            <tr><td><code>put()</code></td><td>Register a PUT route</td></tr>
+            <tr><td><code>delete()</code></td><td>Register a DELETE route</td></tr>
+            <tr><td><code>use()</code></td><td>Mount middleware</td></tr>
+            <tr><td><code>serve()</code></td><td>Start the HTTP server</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Examples</h2>
+
+        <h3>Application setup</h3>
+        <div class="code-block">
+          <span class="cmd">import</span> <span class="dim">"dotenv/config"</span>;<br>
+          <span class="cmd">import</span> path <span class="cmd">from</span> <span class="dim">"path"</span>;<br>
+          <span class="cmd">import</span> { createApp } <span class="cmd">from</span> <span class="dim">"carabao"</span>;<br>
+          <span class="cmd">import</span> routes <span class="cmd">from</span> <span class="dim">"./app/config/routes"</span>;<br>
+          <span class="cmd">import</span> controllers <span class="cmd">from</span> <span class="dim">"./app/controllers/controllers"</span>;<br><br>
+          <span class="cmd">const</span> root = path.basename(__dirname) === <span class="dim">"dist"</span><br>
+          &nbsp;&nbsp;? path.resolve(__dirname, <span class="dim">".."</span>)<br>
+          &nbsp;&nbsp;: __dirname;<br>
+          <span class="cmd">const</span> app = createApp({ root, routes, controllers });<br><br>
+          (<span class="cmd">async</span> () =&gt; {<br>
+          &nbsp;&nbsp;<span class="cmd">const</span> { address, port } = <span class="cmd">await</span> app.serve();<br>
+          &nbsp;&nbsp;console.log(<span class="dim">`Server at http://${address}:${port}`</span>);<br>
+          })();
+        </div>
+
+        <h3>Route definition</h3>
+        <div class="code-block">
+          <span class="cmd">import</span> { controllers } <span class="cmd">from</span> <span class="dim">"../controllers/controllers"</span>;<br><br>
+          <span class="cmd">export default</span> [<br>
+          &nbsp;&nbsp;{ method: <span class="dim">"get"</span>, path: <span class="dim">"/users"</span>, handler: controllers.getUsers },<br>
+          &nbsp;&nbsp;{ method: <span class="dim">"get"</span>, path: <span class="dim">"/users/:id"</span>, handler: controllers.getUser },<br>
+          &nbsp;&nbsp;{ method: <span class="dim">"post"</span>, path: <span class="dim">"/users"</span>, handler: controllers.createUser },<br>
+          ];
+        </div>
+
+        <h3>Controller</h3>
+        <div class="code-block">
+          <span class="cmd">import</span> { Request, Response } <span class="cmd">from</span> <span class="dim">"express"</span>;<br><br>
+          <span class="cmd">export function</span> getUsers(req: Request, res: Response) {<br>
+          &nbsp;&nbsp;res.json([{ id: <span class="dim">1</span>, name: <span class="dim">"Alice"</span> }]);<br>
+          }<br><br>
+          <span class="cmd">export function</span> getUser(req: Request, res: Response) {<br>
+          &nbsp;&nbsp;res.json({ id: req.params.id, name: <span class="dim">"Alice"</span> });<br>
+          }<br><br>
+          <span class="cmd">export function</span> createUser(req: Request, res: Response) {<br>
+          &nbsp;&nbsp;res.status(<span class="dim">201</span>).json(req.body);<br>
+          }
+        </div>
+
+        <h3>Using the Application class</h3>
+        <div class="code-block">
+          <span class="comment">// CommonJS</span><br>
+          <span class="cmd">const</span> { Application, createApp } = <span class="cmd">require</span>(<span class="dim">"carabao"</span>);<br>
+          <span class="cmd">const</span> app = <span class="cmd">new</span> Application({ init: { port: <span class="dim">9000</span> } });<br>
+          app.get(<span class="dim">"/"</span>, (req, res) =&gt; res.send(<span class="dim">"Hello"</span>));<br>
+          app.serve();
+        </div>
+        <div class="code-block">
+          <span class="comment">// ESM / TypeScript</span><br>
+          <span class="cmd">import</span> { Application, createApp } <span class="cmd">from</span> <span class="dim">"carabao"</span>;<br>
+          <span class="cmd">const</span> app = <span class="cmd">new</span> Application({ init: { port: <span class="dim">9000</span> } });<br>
+          app.get(<span class="dim">"/"</span>, (req, res) =&gt; res.send(<span class="dim">"Hello"</span>));<br>
+          <span class="cmd">await</span> app.serve();
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="Carabao.js">
+        </a>
+        <p>MVC Node.js web framework. TypeScript-first, built on Express. Scaffold full projects with a single command.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="installation.html">Installation</a>
+        <a href="usage.html">Usage</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://www.npmjs.com/package/carabao" target="_blank" rel="noopener">npm</a>
+        <a href="https://github.com/marcuwynu23/carabao.js" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/marcuwynu23/carabao.js/releases" target="_blank" rel="noopener">Release Notes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Carabao.js. MIT License.</div>
+  </footer>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('drawerOverlay').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
