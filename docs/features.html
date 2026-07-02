@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Explore the features of Carabao.js — CLI scaffolding, TypeScript-first, Express-based, auto-wired routing, and more.">
+  <title>Features — Carabao.js</title>
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet"
+    href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <a href="index.html"
+      class="logo">
+      <img src="assets/logo.svg" alt="Carabao.js">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="features.html"
+        class="active">Features</a>
+      <a href="installation.html">Install</a>
+      <a href="usage.html">Usage</a>
+    </nav>
+    <button class="hamburger"
+      aria-label="Open menu"
+      onclick="toggleDrawer()">
+      <svg viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18" />
+      </svg>
+    </button>
+  </header>
+
+  <div class="drawer-overlay"
+    id="drawerOverlay"
+    onclick="toggleDrawer()"></div>
+  <div class="drawer"
+    id="drawer">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html"
+      class="active">Features</a>
+    <a href="installation.html">Install</a>
+    <a href="usage.html">Usage</a>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="page-header">
+        <h1><span>Features</span></h1>
+        <p>Everything you need to build production-ready Node.js APIs — nothing you don't.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>Core Features</h2>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>CLI Scaffolding</h3>
+            <p>Generate a complete MVC project with a single command. No manual folder setup, no boilerplate copying.
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>TypeScript-First</h3>
+            <p>Full type safety from request to response. Strict mode enabled by default.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Express Foundation</h3>
+            <p>Built on Express 4.x. Use any Express middleware, template engine, or ecosystem library.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Auto-Wired Routing</h3>
+            <p>Define routes declaratively. Controllers are wired automatically — no manual app.get() chains.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Dual Module Support</h3>
+            <p>Ship both CommonJS and ESM builds. Use whichever module system your project requires.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Zero Configuration</h3>
+            <p>Sensible defaults for Express, TypeScript, and project structure. Override when you need to.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Environment Ready</h3>
+            <p>dotenv integration built-in. .env file generated with every scaffold.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Jest Integrated</h3>
+            <p>Test setup included with every scaffold. Write and run tests immediately.</p>
+          </div>
+        </div>
+
+        <h2>Supported Frameworks & Tools</h2>
+        <p>Carabao.js scaffolds projects that work with the most popular Node.js ecosystem tools:</p>
+        <div class="badge-grid">
+          <span class="badge">Express</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">Jest</span>
+          <span class="badge">dotenv</span>
+          <span class="badge">ts-jest</span>
+          <span class="badge">supertest</span>
+          <span class="badge">ESBuild</span>
+          <span class="badge">Node.js 18+</span>
+          <span class="badge">npm</span>
+          <span class="badge">yarn</span>
+          <span class="badge">pnpm</span>
+        </div>
+
+        <h2>Export Formats & Integration</h2>
+        <p>Carabao.js itself is available as:</p>
+        <ul>
+          <li><strong>CommonJS</strong> — <code>require('carabao')</code></li>
+          <li><strong>ESM / TypeScript</strong> — <code>import { createApp } from 'carabao'</code></li>
+          <li><strong>CLI</strong> — <code>npx carabao create my-app</code></li>
+        </ul>
+        <p>The framework exports both <code>Application</code> (class-based) and <code>createApp</code> (functional)
+          APIs, giving you flexibility in how you structure your server code.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html"
+          class="logo">
+          <img src="assets/logo.svg" alt="Carabao.js">
+        </a>
+        <p>MVC Node.js web framework. TypeScript-first, built on Express. Scaffold full projects with a single command.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="installation.html">Installation</a>
+        <a href="usage.html">Usage</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://www.npmjs.com/package/carabao"
+          target="_blank"
+          rel="noopener">npm</a>
+        <a href="https://github.com/marcuwynu23/carabao.js"
+          target="_blank"
+          rel="noopener">GitHub</a>
+        <a href="https://github.com/marcuwynu23/carabao.js/releases"
+          target="_blank"
+          rel="noopener">Release Notes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Carabao.js. MIT License.</div>
+  </footer>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('drawerOverlay').classList.toggle('open');
+    }
+  </script>
+</body>
+
+</html>
