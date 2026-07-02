@@ -153,23 +153,23 @@ await app.serve();
 
 ### `createApp(options)`
 
-| Option        | Type     | Default      | Description                      |
-|---------------|----------|--------------|----------------------------------|
-| `root`        | `string` | `__dirname`  | Project root directory            |
-| `routes`      | `Route[]`| `[]`         | Array of route definitions        |
-| `controllers` | `object` | `{}`         | Controller map for auto-wiring    |
-| `init`        | `object` | `{ port: 9000 }` | Server configuration          |
+| Option        | Type      | Default          | Description                    |
+| ------------- | --------- | ---------------- | ------------------------------ |
+| `root`        | `string`  | `__dirname`      | Project root directory         |
+| `routes`      | `Route[]` | `[]`             | Array of route definitions     |
+| `controllers` | `object`  | `{}`             | Controller map for auto-wiring |
+| `init`        | `object`  | `{ port: 9000 }` | Server configuration           |
 
 ### `Application`
 
-| Method    | Description                          |
-|-----------|--------------------------------------|
-| `get()`   | Register a GET route                 |
-| `post()`  | Register a POST route                |
-| `put()`   | Register a PUT route                 |
-| `delete()`| Register a DELETE route              |
-| `use()`   | Mount middleware                     |
-| `serve()` | Start the HTTP server                |
+| Method     | Description             |
+| ---------- | ----------------------- |
+| `get()`    | Register a GET route    |
+| `post()`   | Register a POST route   |
+| `put()`    | Register a PUT route    |
+| `delete()` | Register a DELETE route |
+| `use()`    | Mount middleware        |
+| `serve()`  | Start the HTTP server   |
 
 ---
 
