@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Carabao.js — MVC Node.js web framework. TypeScript-first, built on Express. Scaffold full projects with a single command.">
+  <title>Carabao.js — MVC Node.js Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="assets/logo.svg" alt="Carabao.js">
+    </a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="features.html">Features</a>
+      <a href="installation.html">Install</a>
+      <a href="usage.html">Usage</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="installation.html">Install</a>
+    <a href="usage.html">Usage</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-shapes">
+      <div class="hero-shape hero-shape-1"></div>
+      <div class="hero-shape hero-shape-2"></div>
+      <div class="hero-shape hero-shape-3"></div>
+      <div class="hero-shape hero-shape-4"></div>
+      <div class="hero-shape hero-shape-5"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Build Node.js apps with <span>MVC</span>, zero config</h1>
+      <p>TypeScript-first framework on Express. Scaffold, structure, and ship production-ready APIs in seconds — no boilerplate, no hassle.</p>
+      <div class="hero-actions">
+        <a href="installation.html" class="btn btn-primary">Get Started</a>
+        <a href="usage.html" class="btn btn-outline">View Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why <span>Carabao.js</span>?</h2>
+        <p>Built for developers who want structure without the overhead. A familiar Express foundation with TypeScript superpowers.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>CLI Scaffolding</h3>
+          <p>Generate a complete MVC project with a single command. Routes, controllers, middlewares — all wired and ready.</p>
+        </div>
+        <div class="feature-card">
+          <h3>TypeScript-First</h3>
+          <p>Full type safety from request to response. Catch errors at compile time, not runtime.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Express-Based</h3>
+          <p>Familiar API on a battle-tested foundation. No new paradigm to learn — just Express, made cleaner.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Auto-Wired Routing</h3>
+          <p>Define your routes in one place. Controllers are wired automatically — no manual setup.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Flexible Module System</h3>
+          <p>Supports both CommonJS and ESM. Use whatever your project needs.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Zero Config</h3>
+          <p>Sensible defaults out of the box. Easy to override when you need more control.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="Carabao.js">
+        </a>
+        <p>MVC Node.js web framework. TypeScript-first, built on Express. Scaffold full projects with a single command.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="installation.html">Installation</a>
+        <a href="usage.html">Usage</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://www.npmjs.com/package/carabao" target="_blank" rel="noopener">npm</a>
+        <a href="https://github.com/marcuwynu23/carabao.js" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/marcuwynu23/carabao.js/releases" target="_blank" rel="noopener">Release Notes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Carabao.js. MIT License.</div>
+  </footer>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('drawerOverlay').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
