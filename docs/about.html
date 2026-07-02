@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Carabao.js — a TypeScript-first MVC Node.js framework built on Express.">
+  <title>About — Carabao.js</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="assets/logo.svg" alt="Carabao.js">
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="features.html">Features</a>
+      <a href="installation.html">Install</a>
+      <a href="usage.html">Usage</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="features.html">Features</a>
+    <a href="installation.html">Install</a>
+    <a href="usage.html">Usage</a>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>About <span>Carabao.js</span></h1>
+        <p>A TypeScript-first MVC framework built on Express that gets out of your way.</p>
+      </div>
+
+      <div class="content-section">
+        <h2>What is Carabao.js?</h2>
+        <p>Carabao.js is a lightweight MVC web framework for Node.js, built on top of Express. It provides a clean project structure, CLI scaffolding, and full TypeScript support — so you can focus on writing your application logic instead of wiring up boilerplate.</p>
+        <p>The name "Carabao" comes from the carabao — the Filipino water buffalo, a trusted work animal known for strength and reliability. Like its namesake, Carabao.js is built to carry the heavy lifting of project setup so you don't have to.</p>
+
+        <h2>Use Cases</h2>
+
+        <h3>Onboarding new projects</h3>
+        <p>Scaffolding a new API or web app takes seconds. The CLI generates a complete MVC structure with routes, controllers, middlewares, environment config — all ready to build on.</p>
+
+        <h3>API documentation generation</h3>
+        <p>With clearly defined routes and controllers, your project stays organized and easy to document. The structure makes it simple to generate API docs from your route definitions.</p>
+
+        <h3>Test setup & integration</h3>
+        <p>The generated project comes with Jest configured out of the box. Write integration tests against your Express app immediately — no additional setup required.</p>
+
+        <h3>Legacy codebase discovery</h3>
+        <p>When working with existing Express projects, Carabao.js's structured approach helps you organize and discover routes, controllers, and middleware patterns more easily than flat Express setups.</p>
+
+        <h2>Benefits</h2>
+        <ul>
+          <li><strong>Speed</strong> — Go from idea to running server in under a minute.</li>
+          <li><strong>Consistency</strong> — Every project follows the same structure, making it easy to switch between projects.</li>
+          <li><strong>Type safety</strong> — Full TypeScript support means fewer runtime errors and better editor tooling.</li>
+          <li><strong>Express compatible</strong> — Use any Express middleware or ecosystem library without friction.</li>
+          <li><strong>Zero lock-in</strong> — The generated project is standard TypeScript/Express. You can evolve away from the framework if needed.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="Carabao.js">
+        </a>
+        <p>MVC Node.js web framework. TypeScript-first, built on Express. Scaffold full projects with a single command.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="installation.html">Installation</a>
+        <a href="usage.html">Usage</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://www.npmjs.com/package/carabao" target="_blank" rel="noopener">npm</a>
+        <a href="https://github.com/marcuwynu23/carabao.js" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/marcuwynu23/carabao.js/releases" target="_blank" rel="noopener">Release Notes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Carabao.js. MIT License.</div>
+  </footer>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('drawerOverlay').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
