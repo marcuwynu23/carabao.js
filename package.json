@@ -23,7 +23,7 @@
   ],
   "website": "https://carabao.marcuwynu.space",
   "author": "Mark Wayne Menorca",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
