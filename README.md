@@ -1,17 +1,17 @@
-<h1 align="center">Carabao.js</h1>
+<div align="center">
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/carabao"><img src="https://img.shields.io/npm/v/carabao" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/carabao"><img src="https://img.shields.io/npm/dm/carabao" alt="npm downloads"></a>
-  <a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE"><img src="https://img.shields.io/github/license/marcuwynu23/carabao.js?logo=github" alt="License"></a>
-  <a href="https://github.com/marcuwynu23/carabao.js/stargazers"><img src="https://img.shields.io/github/stars/marcuwynu23/carabao.js?style=flat-square&logo=github" alt="Stars"></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node version">
-  <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript">
-</p>
+<img title="" src="./docs/assets/logo-2.svg" alt="" width="208">
 
-<p align="center">
-  <strong>MVC Node.js web framework.</strong> TypeScript-first, built on Express. Scaffold full projects with a single command.
-</p>
+<a href="https://www.npmjs.com/package/carabao"><img src="https://img.shields.io/npm/v/carabao" alt="npm version"></a>
+<a href="https://www.npmjs.com/package/carabao"><img src="https://img.shields.io/npm/dm/carabao" alt="npm downloads"></a>
+<a href="https://github.com/marcuwynu23/carabao.js/blob/main/LICENSE"><img src="https://img.shields.io/github/license/marcuwynu23/carabao.js?logo=github" alt="License"></a>
+<a href="https://github.com/marcuwynu23/carabao.js/stargazers"><img src="https://img.shields.io/github/stars/marcuwynu23/carabao.js?style=flat-square&logo=github" alt="Stars"></a>
+<img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node version">
+<img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript">
+
+<strong>MVC Node.js web framework.</strong> TypeScript-first, built on Express. Scaffold full projects with a single command.
+
+</div>
 
 ---
 
